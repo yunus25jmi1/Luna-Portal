@@ -83,7 +83,7 @@ def direct_link_generator(link: str):
         return ez4(link)
     elif 'ouo.io' in link or 'ouo.press' in link:
         return ouo(link)
-    elif 'terabox.com' in link or 'teraboxapp.com' in link or '4funbox.com' in link:
+    elif any(x in link for x in ['terabox', 'nephobox', '4funbox', 'mirrobox', 'momerybox', 'teraboxapp']):
         return terabox(link)
     elif is_gdtot_link(link):
         return gdtot(link)
