@@ -57,6 +57,14 @@ queued_up = {}
 categories = {}
 non_queued_dl = set()
 non_queued_up = set()
+
+try:
+    if bool(environ.get('_____REMOVE_THIS_LINE_____')):
+        log_error('The README.md file there to be read! Exiting now!')
+        exit()
+except:
+    pass
+
 download_dict_lock = Lock()
 status_reply_dict_lock = Lock()
 queue_dict_lock = Lock()
@@ -72,12 +80,6 @@ if len(BOT_TOKEN) == 0:
     exit(1)
 
 bot_id = BOT_TOKEN.split(':', 1)[0]
-
-FONT = environ.get('FONT', '')
-if len(FONT) == 0:
-    FONT = 'code'
-else:
-    FONT = FONT
 
 DATABASE_URL = environ.get('DATABASE_URL', '')
 if len(DATABASE_URL) == 0:
@@ -307,6 +309,14 @@ if len(BASE_URL) == 0:
     log_warning('BASE_URL not provided!')
     BASE_URL = ''
 
+UPSTREAM_REPO = environ.get('UPSTREAM_REPO', '')
+if len(UPSTREAM_REPO) == 0:
+    UPSTREAM_REPO = ''
+
+UPSTREAM_BRANCH = environ.get('UPSTREAM_BRANCH', '')
+if len(UPSTREAM_BRANCH) == 0:
+    UPSTREAM_BRANCH = 'master'
+
 RCLONE_SERVE_URL = environ.get('RCLONE_SERVE_URL', '')
 if len(RCLONE_SERVE_URL) == 0:
     RCLONE_SERVE_URL = ''
@@ -398,7 +408,6 @@ config_dict = {
     "DUMP_CHAT": DUMP_CHAT,
     "EQUAL_SPLITS": EQUAL_SPLITS,
     "EXTENSION_FILTER": EXTENSION_FILTER,
-    "FONT": FONT,
     "GDRIVE_ID": GDRIVE_ID,
     "INCOMPLETE_TASK_NOTIFIER": INCOMPLETE_TASK_NOTIFIER,
     "INDEX_URL": INDEX_URL,
@@ -431,6 +440,8 @@ config_dict = {
     "TELEGRAM_API": TELEGRAM_API,
     "TELEGRAM_HASH": TELEGRAM_HASH,
     "TORRENT_TIMEOUT": TORRENT_TIMEOUT,
+    "UPSTREAM_REPO": UPSTREAM_REPO,
+    "UPSTREAM_BRANCH": UPSTREAM_BRANCH,
     "UPTOBOX_TOKEN": UPTOBOX_TOKEN,
     "USER_SESSION_STRING": USER_SESSION_STRING,
     "USE_SERVICE_ACCOUNTS": USE_SERVICE_ACCOUNTS,
@@ -515,9 +526,10 @@ if ospath.exists('categories.txt'):
                 tempdict['index_link'] = ''
             categories[name] = tempdict
 
-PORT = environ.get('PORT')
-Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT}", shell=True)
-alive = Popen(["python3", "alive.py"])
+if BASE_URL:
+    Popen(
+        f"gunicorn web.wserver:app --bind 0.0.0.0:{BASE_URL_PORT} --worker-class gevent", shell=True)
+
 srun(["qbittorrent-nox", "-d", f"--profile={getcwd()}"])
 if not ospath.exists('.netrc'):
     with open('.netrc', 'w'):
