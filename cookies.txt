@@ -1,0 +1,13 @@
+# Netscape HTTP Cookie File
+# http://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file!  Do not edit.
+
+.www.zee5.com	TRUE	/	FALSE	1712672302	G_ENABLED_IDPS	google
+www.zee5.com	FALSE	/	FALSE	1680361778	refreshToken	2e815fc429dc312e32e941da94cf08e7201c4caa7b73ea40c31779b6a4bbad4d
+www.zee5.com	FALSE	/	FALSE	0	country	IN
+www.zee5.com	FALSE	/	FALSE	0	display-language	en
+www.zee5.com	FALSE	/	FALSE	0	zee5	oldui
+www.zee5.com	FALSE	/	FALSE	1678176573	xaccesstoken	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF0Zm9ybV9jb2RlIjoiV2ViQCQhdDM4NzEyIiwiaXNzdWVkQXQiOiIyMDIzLTAzLTA2VDIwOjQ2OjU4Ljg2MloiLCJwcm9kdWN0X2NvZGUiOiJ6ZWU1QDk3NSIsInR0bCI6ODY0MDAwMDAsImlhdCI6MTY3ODEzNTYxOH0.0OuBuT0_G0cPDn48nLOClS9CTtlNsQijqRNavPvFif8
+www.zee5.com	FALSE	/	FALSE	0	user-type	premium
+www.zee5.com	FALSE	/	FALSE	0	content-language	bn,en,hi,mr,ta,te
+www.zee5.com	FALSE	/	FALSE	0	state	BR
